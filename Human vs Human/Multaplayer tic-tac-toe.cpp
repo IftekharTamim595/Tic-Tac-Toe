@@ -4,6 +4,7 @@
 #include<conio.h>
 using namespace std;
 bool ok = true;
+string p1,p2;
 bool available (char *spaces)
 {
     for(int i=0;i<9;i++)    {
@@ -52,17 +53,17 @@ void moveX(char *spaces)
         ok = false;
         return;
     }
-        cout<<"Turn of Player 1 (X)\n"<<endl;
-        cout<<"Enter your choice: ";
-        int n;cin>>n;
+        cout<<p1<<"'s Turn(X)\n"<<endl;
+        cout<<"Enter your choice(1-9): ";
+        char n = getch();
         while(spaces[n-'0'-1]=='X' || spaces[n-'0'-1]=='O')    {
                 system("cls");
                 drawboard(spaces);
-            cout<<"This square is obtained by"<<(spaces[n-1]=='X'?"You.":"O.")<<". Choose another one.\n";
+            cout<<"This square is obtained by "<<(spaces[n-'0'-1]=='X'?"You":p2)<<". Choose another one.\n";
             cout<<"Enter your choice(1-9): ";
-            cin>>n;
+            n = getch();
         }
-        spaces[n-1] = 'X';
+        spaces[n-'0'-1] = 'X';
         system("cls");
         drawboard(spaces);
 }
@@ -73,17 +74,17 @@ void moveY(char *spaces)
         ok = false;
         return;
     }
-        cout<<"Turn of Player 1 (X)\n"<<endl;
-        cout<<"Enter your choice: ";
-        int n;cin>>n;
-        while(spaces[n-1]=='X' || spaces[n-1]=='O')    {
+        cout<<p2<<"'s Turn(O)\n"<<endl;
+        cout<<"Enter your choice(1-9): ";
+        char n = getch();
+        while(spaces[n-'0'-1]=='X' || spaces[n-'0'-1]=='O')    {
                 system("cls");
                 drawboard(spaces);
-            cout<<"This square is obtained by"<<(spaces[n-1]=='O'?"You.":"X.")<<". Choose another one.\n";
+            cout<<"This square is obtained by "<<(spaces[n-'0'-1]=='O'?"You.":p1)<<" Choose another one.\n";
             cout<<"Enter your choice(1-9): ";
-            cin>>n;
+            n = getch();
         }
-        spaces[n-1] = 'O';
+        spaces[n-'0'-1] = 'O';
         system("cls");
         drawboard(spaces);
 }
@@ -94,18 +95,23 @@ int main()
 
     char spaces[9] = {' ',' ',' ',' ',' ',' ',' ',' ',' '};
     drawboard(spaces);
-    srand(time(0));
-
-
+    cout<<"Enter the name of Player 1:";
+    cin>>p1;
+    cout<<"Enter the name of Player 2:";
+    cin>>p2;
+    system("cls");
+    drawboard(spaces);
     while(ok)   {
 
         moveX(spaces);
-        moveY(spaces);
 
         if(Xwinner(spaces)) {
             cout<<"'X' is the winner."<<endl;
             return 0;
         }
+
+        moveY(spaces);
+
         if(Owinner(spaces)) {
             cout<<"'O' is the winner."<<endl;
             return 0;
