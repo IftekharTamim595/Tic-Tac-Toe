@@ -33,19 +33,24 @@ bool Xwinner (char *spaces)
     if(spaces[6] == spaces[7] && spaces[7] == spaces[8] && spaces[7]=='X')  return true;
     if(spaces[0] == spaces[4] && spaces[4] == spaces[8] && spaces[8]=='X')  return true;
     if(spaces[2] == spaces[4] && spaces[4] == spaces[6] && spaces[6]=='X')  return true;
-
+    if(spaces[2] == spaces[5] && spaces[5] == spaces[8] && spaces[8]=='X')  return true;
+    if(spaces[0] == spaces[3] && spaces[3] == spaces[6] && spaces[6]=='X')  return true;
+    if(spaces[1] == spaces[4] && spaces[4] == spaces[7] && spaces[7]=='X')  return true;
     return false;
 }
 bool Owinner (char *spaces)
 {
     if(spaces[0] == spaces[1] && spaces[1] == spaces[2] && spaces[0]=='O')  return true;
-    if(spaces[3] == spaces[4] && spaces[4] == spaces[5] && spaces[5]=='O')  return true;
-    if(spaces[6] == spaces[7] && spaces[7] == spaces[8] && spaces[8]=='O')  return true;
+    if(spaces[3] == spaces[4] && spaces[4] == spaces[5] && spaces[3]=='O')  return true;
+    if(spaces[6] == spaces[7] && spaces[7] == spaces[8] && spaces[7]=='O')  return true;
     if(spaces[0] == spaces[4] && spaces[4] == spaces[8] && spaces[8]=='O')  return true;
     if(spaces[2] == spaces[4] && spaces[4] == spaces[6] && spaces[6]=='O')  return true;
-
+    if(spaces[2] == spaces[5] && spaces[5] == spaces[8] && spaces[8]=='O')  return true;
+    if(spaces[0] == spaces[3] && spaces[3] == spaces[6] && spaces[6]=='O')  return true;
+    if(spaces[1] == spaces[4] && spaces[4] == spaces[7] && spaces[7]=='O')  return true;
     return false;
 }
+
 void moveX(char *spaces)
 {
     if(!available(spaces))
@@ -53,7 +58,7 @@ void moveX(char *spaces)
         ok = false;
         return;
     }
-        cout<<p1<<"'s Turn(X)\n"<<endl;
+        cout<<p1<<"'s Turn (X)\n"<<endl;
         cout<<"Enter your choice(1-9): ";
         char n = getch();
         while(spaces[n-'0'-1]=='X' || spaces[n-'0'-1]=='O')    {
@@ -101,26 +106,31 @@ int main()
     cin>>p2;
     system("cls");
     drawboard(spaces);
+    cout<<p1<<" is 'X' and "<<p2<<" is 'O'."<<endl;
+    cout<<"\nEach of 9 squares of the board can be accessed by integer value from 1 to 9.\n"<<endl;
+    system("Pause");
+    system("cls");
+    drawboard(spaces);
     while(ok)   {
 
         moveX(spaces);
 
         if(Xwinner(spaces)) {
-            cout<<"'X' is the winner."<<endl;
+            cout<<p1<<" is the winner."<<endl;
             return 0;
         }
 
         moveY(spaces);
 
         if(Owinner(spaces)) {
-            cout<<"'O' is the winner."<<endl;
+            cout<<p2<<" is the winner."<<endl;
             return 0;
         }
 
 
     }
 
-    cout<<"It's a draw"<<endl;
+    cout<<"It's a draw."<<endl;
 
 
 
